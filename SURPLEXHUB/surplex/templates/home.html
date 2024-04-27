@@ -1,0 +1,59 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if category %}
+<div>
+    <div>
+        <p Class="text-center"><a href="{% url 'home' %}">OUR CATEGORIES</a></p>
+    </div>
+</div>
+{% endif %}
+<div>
+{% if category %}
+<img src="{{category.image.url}}" style="width:1700px;height:800px;">
+</div>
+
+<br>
+
+<div>
+    <h1 > {{category.name}}</h1>
+    <p >{{category.description}}</p>
+</div>
+
+{% else %}
+
+<div class = "container.fluid p-50" style="background-color:lightpink;">
+ <img src="{% static 'images/online.jpg' %}" alt="wallpaper_image" style="width:1900px; height:700px;" >
+<h1 style="text-align:center;">
+
+<i>HERE YOU CAN FIND PRODUCTS WITH HIGH QUALITY IN YOUR POCKET</i>
+
+</h1>
+</div>
+<div>
+    <h1 style="text-align:center; color:red; font-size: 56px;"><i>Explore our Product Collections!!!</i></h1>
+  <p style="font-family: Arial;text-align:center;">here you can find all the products that you needed with high quality. and the price will surprise you <br>
+    we came up with the idea of having flagship brand quality within budget without sacrifice in product quality <br>
+        we assure that you won't regret your money and time . <strong>'YOUR CHOICE IS OUR REWARD'</p>
+</div>
+
+{% endif %}
+
+<div class="container" >
+    <div class="row">
+    {% for product in products %}
+        <div Class="col-9 col-sm-10 col-md-4" >
+    <div class="card" style="width: 18rem;">
+  <a href="{{product.get_url}}"><img style="width:180px;height:220px;" class="card-img-top" src="{{product.image.url}}" alt="Card image cap"></a>
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">${{product.price}}</p>
+    <a href="#" class="btn btn-primary">Add to Cart</a>
+  </div>
+</div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+    {% endblock %}
